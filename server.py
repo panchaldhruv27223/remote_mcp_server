@@ -39,4 +39,4 @@ def get_user_messages(data: GetMessagesInput):
 
 if __name__ == "__main__":
     # app.run(host="0.0.0.0", port=8000)
-    asyncio.run(app.run_streamable_http_async(host="0.0.0.0", port=8000))
+    asyncio.run(app.run_streamable_http_async(host="0.0.0.0"))
