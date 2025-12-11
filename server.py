@@ -48,10 +48,11 @@
 #     app.run()
 #     # asyncio.run(app(transport="http", host="0.0.0.0"))
 
+import os
 from fastmcp import FastMCP
 from pydantic import BaseModel
-from db import init_db, save_message, fetch_messages
 from starlette.responses import JSONResponse
+from db import init_db, save_message, fetch_messages
 
 class SaveMessageInput(BaseModel):
     user_id: str
@@ -76,13 +77,16 @@ def get_user_messages(data: GetMessagesInput):
         "user_id": data.user_id,
         "messages": [
             {"id": r[0], "message": r[1], "created_at": r[2]} for r in rows
-        ],
+        ]
     }
 
-# Optional health check
 @app.custom_route("/health", methods=["GET"])
 async def health(request):
     return JSONResponse({"status": "healthy"})
 
 if __name__ == "__main__":
-    app.run(transport="http", host="0.0.0.0", port=int(os.getenv("PORT", 8000)))
+    app.run(
+        transport="http",
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", 8000))
+    )
