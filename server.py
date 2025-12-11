@@ -1,4 +1,5 @@
 from fastmcp import FastMCP
+import asyncio
 from db import init_db, save_message, fetch_messages
 from pydantic import BaseModel
 
@@ -11,6 +12,8 @@ class GetMessagesInput(BaseModel):
 
 
 app = FastMCP("sqlite-mcp-server")
+
+# print(dir(app))
 
 init_db()
 
@@ -35,4 +38,5 @@ def get_user_messages(data: GetMessagesInput):
     return {"user_id": data.user_id, "messages": messages}
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    # app.run(host="0.0.0.0", port=8000)
+    asyncio.run(app.run_streamable_http_async(host="0.0.0.0", port=8000))
