@@ -35,4 +35,4 @@ def get_user_messages(data: GetMessagesInput):
     return {"user_id": data.user_id, "messages": messages}
 
 if __name__ == "__main__":
-    app.run_http(host="0.0.0.0", port=8000)
+    app.run(host="0.0.0.0", port=8000)
