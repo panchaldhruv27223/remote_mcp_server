@@ -38,7 +38,7 @@ def get_user_messages(data: GetMessagesInput):
     return {"user_id": data.user_id, "messages": messages}
 
 
-@app.custom_route("/")
+@app.custom_route("/", methods=["GET"])
 def root():
     return {"status": "ok", "message": "MCP server is running"}
 
