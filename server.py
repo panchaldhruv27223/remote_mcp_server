@@ -37,6 +37,14 @@ def get_user_messages(data: GetMessagesInput):
     ]
     return {"user_id": data.user_id, "messages": messages}
 
+
+@app.custom_route("/")
+def root():
+    return {"status": "ok", "message": "MCP server is running"}
+
+
+
+
 if __name__ == "__main__":
     # app.run(host="0.0.0.0", port=8000)
     asyncio.run(app.run_streamable_http_async(host="0.0.0.0"))
